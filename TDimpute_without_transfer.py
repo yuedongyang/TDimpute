@@ -117,12 +117,12 @@ import getopt
 import sys
 print(sys.argv)
 
-datadir = sys.argv[1] #e.g.,'/data0/zhoux'
-os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[2]
-cancer_names = [sys.argv[3]] #smaple size greater than 200
+#datadir = sys.argv[1] #e.g.,'/data0/zhoux'
+os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
+cancer_names = [sys.argv[2]] #smaple size greater than 200
 # cancer_names = ['LUSC', 'KIRC', 'CESC', 'STAD', 'SARC', 'COAD','KIRP', 'LUAD', 'BLCA', 'BRCA','HNSC','LGG_','PRAD','THCA','SKCM', 'LIHC']
-full_dataset_path = sys.argv[4]
-imputed_dataset_path = sys.argv[5]
+full_dataset_path = sys.argv[3]
+imputed_dataset_path = sys.argv[4]
 
 sample_size = 5
 loss_list = np.zeros([16, 5, sample_size]);
