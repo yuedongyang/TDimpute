@@ -159,20 +159,20 @@ import getopt
 import sys
 print(sys.argv)
 
-datadir = sys.argv[1] #e.g.,'/data0/zhoux'
-os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[2]
-df = np.loadtxt(datadir+'/RNA_DNA_combine.csv', delimiter=',',skiprows=1, usecols=(range(1, 46745)))
-col = pd.read_csv(datadir+'/RNA_DNA_combine.csv', delimiter=',',header = None, nrows=1)
+#datadir = sys.argv[1] #e.g.,'/data0/zhoux'
+os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
+df = np.loadtxt('RNA_DNA_combine.csv', delimiter=',',skiprows=1, usecols=(range(1, 46745)))
+col = pd.read_csv('RNA_DNA_combine.csv', delimiter=',',header = None, nrows=1)
 columns_ind = col.values[0,1:]
 print(columns_ind.shape)
-rows_ind = np.loadtxt(datadir+'/RNA_DNA_combine.csv', delimiter=',',skiprows=1, usecols=0, dtype=np.str)  #shape = (8856, 288050)
+rows_ind = np.loadtxt('RNA_DNA_combine.csv', delimiter=',',skiprows=1, usecols=0, dtype=np.str)  #shape = (8856, 288050)
 print(rows_ind.shape)
 RNA_DNA_txt = pd.DataFrame(df, index=rows_ind.reshape(1,8856)[0], columns =columns_ind.reshape(1,46744)[0])
 
-cancer_names = [sys.argv[3]] #smaple size greater than 200
+cancer_names = [sys.argv[2]] #smaple size greater than 200
 # cancer_names = ['LUSC', 'KIRC', 'CESC', 'STAD', 'SARC', 'COAD','KIRP', 'LUAD', 'BLCA', 'BRCA','HNSC','LGG_','PRAD','THCA','SKCM', 'LIHC']
-full_dataset_path = sys.argv[4]
-imputed_dataset_path = sys.argv[5]
+full_dataset_path = sys.argv[3]
+imputed_dataset_path = sys.argv[4]
 
 sample_size = 5
 loss_list = np.zeros([16, 5, sample_size]);
