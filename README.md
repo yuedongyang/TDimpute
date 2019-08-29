@@ -1,6 +1,6 @@
 # TDimpute 
 TDimpute is designed to impute missing gene expression data from DNA methylation data by using transfer learning based deep neural network.
-The method is still on progress. For any questions about the code, please contact zhoux85@mail2.sysu.edu.cn
+The method is still on progress. For any questions about the code or original datasets, please contact zhoux85@mail2.sysu.edu.cn
 
 # Requirements
 tensorflow, python 3
