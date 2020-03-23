@@ -16,7 +16,7 @@ preprocessCore 1.48.0
 
 * ```reference_distribution_DNA_TCGA.RData``` (DNA methylation) and ```reference_distribution_RNA_TCGA.RData``` (RNA-seq) are two processed files using funciton "normalize.quantiles.determine.target" in R package "preprocessCore". They can be loaded directly as reference distribution of DNA methylation and RNA-seq data from TCGA.
 
-* We use the Wilms tumor (WT) dataset (```DNA_WT.csv``` and ```UCSC_RNA_WT.csv```) from TARGET cancer project as a example for imputing RNA-seq data using DNA methylation data. Note that the RNA-seq data should be quantified as RSEM estimated read counts, since we pretrained the neural network with the RNA-seq data of RNASeqV2_RSEM. The pretrained model with other quantification, such as readcounts, TPM, will be provided later.
+* We use the Wilms tumor (WT) dataset (```DNA_WT.csv``` and ```UCSC_RNA_WT.csv```) from TARGET cancer project as a example for imputing RNA-seq data using DNA methylation data. Note that the RNA-seq data should be quantified as RSEM estimated read counts, because we pretrained the neural network with the RNA-seq data of RNASeqV2_RSEM. The pretrained model with other quantification, such as readcounts, TPM, will be provided later.
 
 ```quantile_normalization_process.R``` is used to remove technical variabilities between TCGA and the dataset (outside TCGA) you want to impute: specifically, the TCGA data is considered as reference to normalize the your dataset into the same distribution. 
 
