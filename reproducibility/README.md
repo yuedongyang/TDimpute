@@ -2,7 +2,7 @@ This folder contains the code for the downstream analyses in the manuscript.
 
 ## Dependencies
 
-Running these analyses requires prior installation of the R libraries:
+Running these analyses requires prior installation of the R libraries:  
 `psych`   
 `PRROC`  
 `survival`  
