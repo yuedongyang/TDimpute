@@ -22,13 +22,22 @@ The `UCEC_data` folder includes the UCEC dataset from the TCGA project. The samp
 
 Here is a brief summary of what every script does:
 ./Figure2: Seven imputation methods mentioned in the manuscript for generating the imputed datasets of the 16 cancers.
+
 ./Figure3_Table2/CpG-gene_baseline.R: compute baseline correlation for the CpG-gene pairs.
+
 ./Figure3_Table2/CpG-gene_compare.R: compute correlation of the CpG-gene pairs from datasets imputed by different methods, Figure 3.
+
 ./Figure3_Table2/CpG-gene_select.R: compute gene lists from datasets imputed by different methods, Table 2.
+
 ./Table3_Table4/cox_filter_baseline_generate.R: compute baseline prognosis-related gene lists.
+
 ./Table3_Table4/cox_filter_by_cancer.R: compare the prognosis-related gene lists from different imputed datasets, Table 3.
+
 ./Table3_Table4/cox_biomarker_by_cancer.R: compare the prognosis-related gene lists from different imputed datasets, Table 4.
+
 ./Figure4/cindex_by_cancer.R: cluster analyses in Fig 4A.
+
 ./Figure4/cox_filter_kmeans_by_cancer.R: survival analyses in Fig 4B.
+
 ./UCEC and ./WT: scripts for imputing and survival analyses for dataset UCEC and WT.
 
