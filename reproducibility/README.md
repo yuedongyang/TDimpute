@@ -3,20 +3,20 @@ This folder contains the code for the downstream analyses in the manuscript.
 ## Dependencies
 
 Running these analyses requires prior installation of the R libraries:
-`psych` 
-`PRROC`
-`survival`
-`plyr`
-`caret`
+`psych`   
+`PRROC`  
+`survival`  
+`plyr ` 
+`caret`  
 
 ## Supporting data
 
 The datasets used in the analyses can be downloaded from Synapse with ID:  [syn21438134](https://www.synapse.org/#!Synapse:syn21438134). 
-The `clinical_cancers` folder includes the clinical information.
-The `bootstrap_cancer_V1` folder includes the actual datasets with complete gene expression data and DNA methylation data. Bootstrapping strategy is needed to sample the datasets for splitting training and testing datasets.
-The `baseline_prognostic_biomarker` folder includes the prognosis-related gene list downloaded from The Human Protein Atlas.
-The `WT_data` folder includes the Wilams tumor datasets from the TARGET project. 
-The `UCEC_data` folder includes the UCEC dataset from the TCGA project. The samples missing gene expression are filled with NA.
+The `clinical_cancers` folder includes the clinical information.  
+The `bootstrap_cancer_V1` folder includes the actual datasets with complete gene expression data and DNA methylation data. Bootstrapping strategy is needed to sample the datasets for splitting training and testing datasets.  
+The `baseline_prognostic_biomarker` folder includes the prognosis-related gene list downloaded from The Human Protein Atlas.  
+The `WT_data` folder includes the Wilams tumor datasets from the TARGET project.   
+The `UCEC_data` folder includes the UCEC dataset from the TCGA project. The samples missing gene expression are filled with NA.  
 
 ## Scripts 
 
