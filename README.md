@@ -39,6 +39,10 @@ Example code for RNA-seq imputation:
 * ```TDimpute_finetune.py``` fine-tune the pretrained model if both methylation and RNA-seq available.
 * ```TDimpute_pretrain.py``` uses the pretrained model directly for imputation if no RNA-seq data are provided for fine-tune (only methylation).
 
+# Reproducibility
+
+Please refer to the corresponding `reproducibility` folder for detailed information.
+
 
 # Citation
-If you find this work useful in your research, please consider citing the paper: "Imputing missing RNA-seq data from DNA methylation by using transfer learning based neural network".
+If you find this work useful in your research, please consider citing our paper: "Imputing missing RNA-seq data from DNA methylation by using transfer learning based neural network", [BioRxiv](https://doi.org/10.1101/803692), 2019.

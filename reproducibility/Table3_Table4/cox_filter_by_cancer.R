@@ -1,4 +1,4 @@
-### compare the prognosis-related gene lists from different imputed datasets, Table 2 and Table 3 in the paper
+### compare the prognosis-related gene lists from different imputed datasets, Table 3 in the paper
 
 rm(list = ls())
 print('start...')
