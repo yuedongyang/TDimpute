@@ -20,7 +20,7 @@ The `UCEC_data` folder includes the UCEC dataset from the TCGA project. The samp
 
 ## Scripts 
 
-Here is a brief summary of what every script does:
+Here is a brief summary of what every script does:  
 ./Figure2: Seven imputation methods mentioned in the manuscript for generating the imputed datasets of the 16 cancers.
 
 ./Figure3_Table2/CpG-gene_baseline.R: compute baseline correlation for the CpG-gene pairs.
