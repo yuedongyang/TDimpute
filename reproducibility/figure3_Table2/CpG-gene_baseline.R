@@ -1,4 +1,5 @@
-###compute baseline pearson correlation between RNAseq matrix and DNA methylation matrix 
+###compute baseline pearson correlation between RNAseq matrix and DNA methylation matrix
+###run before CpG-gene_compare.R and CpG-gene_select.R
 rm(list = ls())
 print('start...')
 library('psych')
@@ -18,6 +19,8 @@ shuffle_cancer<-matrix(aa,nrow=dim(shuffle_cancer)[1],ncol=dim(shuffle_cancer)[2
 rnames<- row.names(shuffle_cancer)
 shuffle_cancer <- shuffle_cancer[!duplicated(rnames), ] 
 
+#RNA_size: 19027
+#DNA_size: 27717
 baseline_coeff<-cor( x=shuffle_cancer[,1:19027], y=shuffle_cancer[,19028:ncol(shuffle_cancer)] ) #compute pearson correlation
 baseline_coeff <- na.omit(baseline_coeff) ###drop the NA gene-CpG pair
 cat('dim(baseline_coeff): ', dim(baseline_coeff), '\n')

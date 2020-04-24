@@ -152,3 +152,98 @@ for(cancertype in reduced_names){
 	save(dataset,max_pair, coeff_matrix_1,coeff_matrix_2,coeff_matrix_3,coeff_matrix_4,coeff_matrix_5, file=coeff_file)	
   }
 }
+
+
+###############plot summary of 16 cancers
+###############top 100 CpG-gene pairs
+options(stringsAsFactors=F)
+samples<-5
+dataset_all<-data.frame()
+for(cancertype in c('LUSC', 'KIRC', 'CESC', 'STAD', 'SARC', 'COAD','KIRP', 'LUAD', 'BLCA', 'BRCA','HNSC','LGG_','PRAD','THCA','SKCM', 'LIHC')){
+  coeff_file<-paste("/data/coeff_matrix/coeff_matrix_base",cancertype,"_gene_CPG_pair.RData",sep = "")
+  print(coeff_file)
+  load(file=coeff_file)
+  max_pair$gene<-as.character(max_pair$gene)
+  #sig_gene <- max_pair[max_pair$max_pcc**2>=0.5, 'gene']
+  sig_gene <- max_pair[order(max_pair$max_pcc**2, decreasing = TRUE), ]
+  sig_gene <- sig_gene[1:100, 'gene']  
+  cat('sig_gene length:',length(sig_gene),'\n')
+  
+  dataset_by_cancer<-data.frame()
+  for(miss_rate in c(0.1,0.3,0.5,0.7,0.9)){	 
+    coeff_file<-paste("/data/coeff_matrix/corr_",samples,cancertype,miss_rate*100,"_gene_CPG_pair.RData",sep = "")
+    print(coeff_file)
+    load(file=coeff_file)
+    method_0 <- mean(max_pair[max_pair$gene %in% sig_gene, 'max_pcc'])
+    method_0 <- data.frame(correlation=method_0, method='FULL', sample_count=0)
+    
+    method_tmp <- data.frame(coeff_matrix_1,stringsAsFactors = FALSE)
+    colnames(method_tmp)<-as.character(max_pair$gene)
+    method_1<-rowMeans(method_tmp[,colnames(method_tmp) %in% sig_gene])
+    method_1 <- data.frame(correlation=method_1, method='SVD', sample_count=seq(5)) 
+    
+    method_tmp <- data.frame(coeff_matrix_2,stringsAsFactors = FALSE)
+    colnames(method_tmp)<-as.character(max_pair$gene)
+    method_2<-rowMeans(method_tmp[,colnames(method_tmp) %in% sig_gene])
+    method_2 <- data.frame(correlation=method_2, method='TOBMI', sample_count=seq(5))
+    
+    method_tmp <- data.frame(coeff_matrix_3,stringsAsFactors = FALSE)
+    colnames(method_tmp)<-as.character(max_pair$gene)
+    method_3<-rowMeans(method_tmp[,colnames(method_tmp) %in% sig_gene])
+    method_3 <- data.frame(correlation=method_3, method='TDimpute-self', sample_count=seq(5))
+    
+    method_tmp <- data.frame(coeff_matrix_4,stringsAsFactors = FALSE)
+    colnames(method_tmp)<-as.character(max_pair$gene)
+    method_4<-rowMeans(method_tmp[,colnames(method_tmp) %in% sig_gene])      
+    method_4 <- data.frame(correlation=method_4, method='TDimpute', sample_count=seq(5))
+    
+    method_tmp <- data.frame(coeff_matrix_5,stringsAsFactors = FALSE)
+    colnames(method_tmp)<-as.character(max_pair$gene)
+    method_5 <- rowMeans(method_tmp[,colnames(method_tmp) %in% sig_gene])      
+    method_5 <- data.frame(correlation=method_5, method='Lasso', sample_count=seq(5))    
+    
+    dataset<-rbind(method_0,method_1,method_2,method_5, method_3,method_4)
+    dataset$missing <- paste(miss_rate*100,'%',sep = "")
+    dataset$cancertype <- cancertype
+    
+    if(miss_rate==0.1){ #only keep Full data in the 10% label 
+      dataset[dataset$method=='FULL','missing'] <- "FULL"
+    }else{
+      dataset <- dataset[dataset$method!='FULL',]  ##remove the Full data in other labels (i.e., 30%-90%)
+    }
+    dataset_by_cancer <- rbind(dataset_by_cancer,dataset)
+  }
+  dataset_all <- rbind(dataset_all, dataset_by_cancer)
+}
+
+dataset_cancers<-data.frame()
+dataset_mean_cancer_a0<-data.frame()
+for(miss_rate in c('10%','30%','50%','70%','90%')){	  
+  for(method in c('SVD','TOBMI','Lasso','TDimpute-self','TDimpute')){
+    for(sample_count in 1:samples){
+      ##mean of 16 cancers
+      dataset<-data.frame(method=method, sample_count=sample_count,missing=miss_rate)
+      aa<-mean(dataset_all[dataset_all$sample_count==sample_count & dataset_all$method==method & dataset_all$missing==miss_rate,'correlation'] )
+      dataset$correlation<-aa
+      dataset_cancers <- rbind(dataset_cancers, dataset)
+    }
+    ##mean by sample_count
+    dataset<-data.frame(method=method, missing=miss_rate)
+    dataset$correlation <- mean(dataset_cancers[dataset_cancers$method==method&dataset_cancers$missing==miss_rate,'correlation'])
+    dataset_mean_cancer_a0 <- rbind(dataset_mean_cancer_a0, dataset)
+  }
+}
+
+average_all<-data.frame(matrix(nrow = 5, ncol=5))
+colnames(average_all)<-c('SVD','TOBMI','Lasso','TDimpute-self','TDimpute')
+row.names(average_all)<-c('10%','30%','50%','70%','90%')
+j<-0
+for(method in c('SVD','TOBMI','Lasso','TDimpute-self','TDimpute')){
+  j<-j+1
+  i<-0
+  for(miss_rate in c('10%','30%','50%','70%','90%')){	
+    i<-i+1
+    average_all[i,j] <- dataset_mean_cancer_a0[dataset_mean_cancer_a0$method==method&dataset_mean_cancer_a0$missing==miss_rate, 'correlation']
+  }
+}
+print(average_all)

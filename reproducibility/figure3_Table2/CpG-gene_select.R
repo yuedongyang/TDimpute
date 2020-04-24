@@ -424,6 +424,6 @@ for(cancertype in reduced_names){
 
 	coeff_file<-paste(datadir,"/coeff_matrix/PRAUC_data_",samples,cancertype,missing_perc*100,".RData",sep = "")
 	print(coeff_file)
-	save(sig_matrix_1, sig_matrix_2, sig_matrix_3, sig_matrix_4,sig_matrix_5,file=coeff_file)	
+	save(sig_matrix_1, sig_matrix_2, sig_matrix_3, sig_matrix_4, sig_matrix_5, file=coeff_file)
   }
 }
