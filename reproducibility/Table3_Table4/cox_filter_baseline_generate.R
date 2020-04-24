@@ -1,5 +1,5 @@
 ###compute baseline for prognosis-related genes
-
+###run before cox_biomarker_by_cancer.R and cox_filter_by_cancer.R
 rm(list = ls())
 print('start...')
 

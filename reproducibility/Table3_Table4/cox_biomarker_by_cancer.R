@@ -76,7 +76,7 @@ Unicox <- function(x){
   return(Uni_cox)
 }
 
-baseline_gene_file<-paste(datadir,'/cox_results/',cancertype,'_baseline_gene_including_06.csv',sep = "")
+baseline_gene_file<-paste(datadir,'/cox_results/',cancertype,'_baseline_gene_list.csv',sep = "")
 baseline_gene <- read.table(baseline_gene_file,sep = ",",header=T,stringsAsFactors=FALSE,check.names=F)
 
 VarNames <- baseline_gene$Characteristics  ###gene_names
